@@ -20,7 +20,6 @@ module idex_reg #(
   input id_branch,
   input id_add,
   input id_immediate,
-  input [1:0] id_alusrc1,
   input [1:0] id_jump,
 
   // mem control
@@ -50,7 +49,6 @@ module idex_reg #(
   output reg ex_branch,
   output reg ex_add,
   output reg ex_immediate,
-  output reg [1:0] ex_alusrc1,
   output reg [1:0] ex_jump,
 
   // mem control
@@ -83,7 +81,6 @@ always @(posedge clk) begin
     ex_branch <= 0;
     ex_add <=0;
     ex_immediate <= 0;
-    ex_alusrc1 <= 0;
     ex_jump <= 0;
 
     ex_memread <= 0;
@@ -108,7 +105,6 @@ always @(posedge clk) begin
     ex_branch <= id_branch;
     ex_add <= id_add;
     ex_immediate <= id_immediate;
-    ex_alusrc1 <= id_alusrc1;
     ex_jump <= id_jump;
 
     ex_memread <= id_memread;

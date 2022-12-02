@@ -115,7 +115,7 @@ hazard m_hazard(
 );
 
 // wires for control unit
-wire [1:0] id_toreg, id_alusrc1, id_jump;
+wire [1:0] id_toreg, id_jump;
 wire id_branch, id_memread, id_add, id_memwrite, id_regwrite, id_immediate;
 
 // control unit
@@ -129,7 +129,6 @@ control m_control(
   .memwrite(id_memwrite),
   .regwrite(id_regwrite),
   .immediate(id_immediate),
-  .alusrc1(id_alusrc1),
   .jump(id_jump)
 );
 
@@ -164,7 +163,7 @@ register_file m_register_file(
 // wires for ID/EX pipeline register
 wire [DATA_WIDTH-1:0] idex_out_ex_pc, idex_out_ex_pc_plus_4;
 wire idex_out_ex_branch, idex_out_ex_add, idex_out_ex_immediate;
-wire [1:0] idex_out_ex_alusrc1, idex_out_ex_jump;
+wire [1:0] idex_out_ex_jump;
 wire idex_out_ex_memread, idex_out_ex_memwrite;
 wire [1:0] idex_out_ex_toreg;
 wire idex_out_ex_regwrite;
@@ -182,7 +181,6 @@ idex_reg m_idex_reg(
   .id_branch(id_branch),
   .id_add(id_add),
   .id_immediate(id_immediate),
-  .id_alusrc1(id_alusrc1),
   .id_jump(id_jump),
   .id_memread(id_memread),
   .id_memwrite(id_memwrite),
@@ -202,7 +200,6 @@ idex_reg m_idex_reg(
   .ex_branch(idex_out_ex_branch),
   .ex_add(idex_out_ex_add),
   .ex_immediate(idex_out_ex_immediate),
-  .ex_alusrc1(idex_out_ex_alusrc1),
   .ex_jump(idex_out_ex_jump),
   .ex_memread(idex_out_ex_memread),
   .ex_memwrite(idex_out_ex_memwrite),
@@ -308,17 +305,7 @@ mux_3x1 m_rs2_mux(
 );
 
 // wires for ALU inputs
-wire [DATA_WIDTH-1:0] ex_alu_input1, ex_alu_input2;
-
-// 3x1 mux for ALU inputx
-mux_3x1 m_alu_src1_mux(
-  .select(idex_out_ex_alusrc1),
-  .in1(ex_rs1_mux_out),
-  .in2(32'h0000_0000), // This is always zero !!
-  .in3(idex_out_ex_pc),
-
-  .out(ex_alu_input1)
-);
+wire [DATA_WIDTH-1:0] ex_alu_input2;
 
 // 2x1 mux for ALU inputy
 mux_2x1 m_alu_src2_mux(
@@ -332,7 +319,7 @@ mux_2x1 m_alu_src2_mux(
 // ALU
 alu m_alu(
   .operation(ex_alu_operation),
-  .inputx(ex_alu_input1), 
+  .inputx(ex_rs1_mux_out), 
   .inputy(ex_alu_input2), 
 
   .result(ex_alu_result)
