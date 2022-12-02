@@ -1,5 +1,5 @@
 # Pipelined_CPU_RISC-V
- Pipelined CPU for RISC-V rchitecture
+ Pipelined CPU for RISC-V architecture
 
 ![image](Pipelined_CPU_diagram.jpg)
 [Pipelined CPU Diagram]
