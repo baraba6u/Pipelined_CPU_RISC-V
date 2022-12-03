@@ -415,7 +415,7 @@ memwb_reg m_memwb_reg(
 // Write Back (WB) 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* m_write_back_mux: selects what to write back */
+// 3x1 mux for write back on register
 mux_3x1 m_write_back_mux(
   .select(memwb_out_wb_toreg),
   .in1(memwb_out_wb_alu_result), // alu
