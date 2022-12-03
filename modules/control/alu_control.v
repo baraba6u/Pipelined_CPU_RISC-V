@@ -56,7 +56,8 @@ always @(*) begin
         3'b011: operation = `OP_SLTU;
       endcase
     end
-    2'b01: begin // None
+    2'b01: begin // Should not fall here
+      operation = `OP_EEE;
     end
     2'b11: begin // load, store, jalr
       operation = `OP_ADD;

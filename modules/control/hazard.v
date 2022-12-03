@@ -28,8 +28,8 @@ module hazard (
   output reg ifid_bubble,    // stall
 
   output reg ifid_flush,     // flush IF/ID pipeline register
-  output reg idex_bubble,     // flush ID/EX pipeline register
-  output reg exmem_bubble   // fluish EX/MEM pipeline register
+  output reg idex_bubble,    // flush ID/EX pipeline register
+  output reg exmem_bubble    // fluish EX/MEM pipeline register
 );
 
 wire stall_condition;
