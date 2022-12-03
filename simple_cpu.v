@@ -1,16 +1,6 @@
 // simple_cpu.v
 // a pipelined RISC-V microarchitecture (RV32I)
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-// [*] In simple_cpu.v you should connect the correct wires to the correct ports
-//     - All modules are given so there is no need to add new modules
-//     - However, you are still free to add simple modules like multiplexers,
-//       adders, etc.
-//
-// [*] FYI : you should declare wires or registers before you use them like most
-//           programming languages
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-  
 module simple_cpu
 #(parameter DATA_WIDTH = 32)(
   input clk,
